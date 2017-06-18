@@ -1,0 +1,50 @@
+/* You can add global styles to this file, and also import other style files */
+
+body {
+    font-family: 'Varela Round', sans-serif !important;
+}
+
+body > app-root {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+nav ul a {
+    font-size: 15px;
+}
+
+nav ul a:hover {
+    color: #FFF;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.brand-logo > img {
+    height: 50px;
+    width: auto;
+}
+a {
+    cursor: pointer;
+}
+
+label,
+input.form-control {
+    font-size: 15px;
+}
+
+.help-block {
+    font-size: 12px;
+}
+
+.icon-block {
+    padding: 0 15px;
+}
+
+.icon-block .material-icons {
+    font-size: inherit;
+}
