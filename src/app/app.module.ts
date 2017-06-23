@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpModule, Http } from '@angular/http';
+import { HttpModule, Http, BaseRequestOptions } from '@angular/http';
 
 // used for localize-router
 import {TranslateModule, TranslateLoader, TranslateService} from '@ngx-translate/core';
@@ -12,18 +12,19 @@ import {RouterModule} from '@angular/router';
 // used to create fake backend
 import { fakeBackendProvider } from './_helpers/index';
 import { MockBackend, MockConnection } from '@angular/http/testing';
-import { BaseRequestOptions } from '@angular/http';
 
 // tslint:disable-next-line:import-spacing
 import { AppComponent } from './app.component';
-import { routing, localizeRouting } from './app.routing';
+// import { routing, localizeRouting } from './app.routing';
 
 import { AlertComponent } from './_directives/index';
 import { AuthGuard } from './_guards/index';
 import { AlertService, AuthenticationService, UserService } from './_services/index';
-import { HomeComponent } from './home/index';
-import { LoginComponent } from './login/index';
-import { RegisterComponent } from './register/index';
+import { HomeComponent, HomeModule } from './home/index';
+import { LoginComponent, LoginModule } from './login/index';
+import { RegisterComponent, RegisterModule } from './register/index';
+import { AppRoutingModule } from './app.routing.module';
+
 
 export function HttpLoaderFactory(http: Http) {
   return new TranslateHttpLoader(http, '/assets/locales/', '.json');
@@ -33,23 +34,26 @@ export function HttpLoaderFactory(http: Http) {
     imports: [
         BrowserModule,
         FormsModule,
+        RouterModule,
         HttpModule,
-        routing,
-        localizeRouting,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
                 useFactory: HttpLoaderFactory,
                 deps: [ Http ]
             }
-        })
+        }),
+        HomeModule,
+        LoginModule,
+        RegisterModule,
+        AppRoutingModule
     ],
     declarations: [
         AppComponent,
-        AlertComponent,
-        HomeComponent,
-        LoginComponent,
-        RegisterComponent
+        AlertComponent
+        // HomeComponent,
+        // LoginComponent,
+        // RegisterComponent
     ],
     providers: [
         AuthGuard,
